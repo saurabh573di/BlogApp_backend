@@ -1,0 +1,44 @@
+# # enviornment variable 
+
+# step 1 = first create a .env file into the root folder
+# step 2  install .dotenv package from npm
+
+# npm install dotenv
+
+# this is a 0 dependency package means it is not dependt on other dependencies 
+
+# step 3 = 
+
+# some rules for .env file
+# all the variable name should be in uppercase (it is standard means you can follow it or not it will not effect your code )
+
+# if multiple words use underSores _ (standard )
+
+# after every line there not be any comma ,semicolon or colon ( RULE)
+
+
+
+#importnat step  // use these lins on the top of the app.js 
+
+
+# // import the.env // this should be on the top   // this line loads all the variable defined in the .env file into processs.env
+# import dotenv from "dotenv";
+
+
+# //config will read and parse the variables present in .env file .
+# dotenv.config();  
+
+# what process object
+# how to use these enviornmental varibe in another fils 
+# use process.env.youvarname
+
+#or you can create a another file insdie the cofig folder wehre you candefine you 
+# var and then export them from there and use in another files 
+# for eg file 
+
+#import dotenv from "dotenv";
+
+#config will read and parse the variables present in .env file .
+#dotenv.config();  
+#export const ONGODB_URL =process.env.MONGODB_URL 
+#export constPORT_NO = process.env.PORT_NO 
