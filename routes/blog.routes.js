@@ -8,16 +8,16 @@ import {
   register,
   updateProfile,
 } from "../controllers/user.controller.js";
-import { authenticate } from "../middlewares/auth.middleware.js";
-import { validateBody } from "../middlewares/validate.middleware.js";
+import { authenticate } from "../middleware/auth.middleware.js";
+import { validateBody } from "../middleware/validate.middleware.js";
 import {
   loginUserSchema,
-  userRegisterSchema,
+ userRegistrationSchema,
 } from "../validators/user.validator.js";
 
 const router = Router();
 
-router.post("/register", validateBody(userRegisterSchema), register);
+router.post("/register", validateBody(userRegistrationSchema), register);
 
 router.get("/single/:id", getUser);
 

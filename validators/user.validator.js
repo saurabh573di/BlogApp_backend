@@ -22,7 +22,7 @@ import joi from "joi";
 
  // for thenupdate function in controller
 
- export let userUpdateSchema = joi.object({
+ export let userUpdatedSchema = joi.object({
     // here sequence matters first use datatype then others 
     // first use dtatypes after that no sequence matters 
     name:joi.string().required().min(3).max(49).optional(),

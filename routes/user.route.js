@@ -5,44 +5,38 @@
 //! 3) create an instance of Router
 //! 4) define all the routes and attach the controller functions
 //! 5) export the router instance
-
 import { Router } from "express";
 import {
-  deleteUser,
+  deleteProfile,
   getProfile,
   getUser,
-  getUsers,
   login,
   logout,
   register,
-  updateUser,
+  updateProfile,
 } from "../controllers/user.controller.js";
 import { authenticate } from "../middleware/auth.middleware.js";
 import { validateBody } from "../middleware/validate.middleware.js";
 import {
   loginUserSchema,
-  updatedUserSchema,
-  userRegisterSchema,
+  userRegistrationSchema,
 } from "../validators/user.validator.js";
 
 const router = Router();
-// we are router level middleware here validateBdy(params) is a router leveol middleware 
 
-router.post("/register", validateBody(userRegisterSchema), register);
+router.post("/register", validateBody(userRegistrationSchema), register);
 
-router.get("/all", getUsers); //TODO:
-
-router.get("/single/:id", getUser); //TODO:
-
-router.patch("/update/:id", validateBody(updatedUserSchema), updateUser); //TODO:
-
-router.delete("/delete/:id", deleteUser); //TODO:
+router.get("/single/:id", getUser);
 
 router.post("/login", validateBody(loginUserSchema), login);
-  
+
 router.post("/logout", authenticate, logout);
 
 router.get("/profile", authenticate, getProfile);
+
+router.patch("/update-profile", authenticate, updateProfile);
+
+router.patch("/delete-profile", authenticate, deleteProfile);
 
 export default router;
 

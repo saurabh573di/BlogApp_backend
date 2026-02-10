@@ -18,11 +18,13 @@ import { PORT } from "./config/index.js";
 
 
 import { authenticate, authorize } from "./middleware/auth.middleware.js";
-import adminRoutes from "./routes/admin.route.js";
-import blogRoutes from "./routes/blog.route.js";
+import adminRoutes from "./routes/admin.routes.js";
+import blogRoutes from "./routes/blog.routes.js";
 import userRoutes from "./routes/user.route.js";
 
-
+// import seed admin function
+import { seedAdmin } from "./seed/admin.seed.js";
+import cors from "cors";
 
 
 connectDB();
@@ -37,6 +39,8 @@ const app = express();
 if (process.argv[2] === "seedAdmin") {
   seedAdmin();
 }
+
+
 app.use(
   cors({
     // origin: ["http://localhost:5173", "deployed-url-fe"],,
@@ -73,7 +77,7 @@ app.use("/api/v1/admin", authenticate, authorize, adminRoutes);
 // monday today api versioning 
 //^ app.use("",userRoutes)
 
-app.get("/",(res)=>{
+app.get("/",(req,res)=>{
     res.send("working")
 });
 
@@ -84,5 +88,5 @@ app.use(errorHandler)
 app.listen (PORT,(err)=>{
     if(err) console.log(err);
 
-    console.log("server running ")
+    console.log("server running on port " + PORT)
 })

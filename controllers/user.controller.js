@@ -5,7 +5,7 @@ import UserModel from "../models/User.model.js";
 
 //import the validator file 
 import { userRegistrationSchema } from "../validators/user.validator.js";
-import asyncHanlder from "express-async-handler";
+import asyncHandler from "express-async-handler";
 import ErrorResponse from "../utils/ErrorResponse.util.js";
 import { generateJwtToken } from "../utils/jwt.util.js";
 // export const register = async (res,req,next)=>{
