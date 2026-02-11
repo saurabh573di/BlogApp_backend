@@ -3,8 +3,6 @@
 // if you will use erro handler at first it will alwys give error if error is present and not
 
 
-
-//! error middleware
 export const errorHandler = (err, req, res, next) => {
   //! short circuiting
   err.message = err.message || "Something went wrong";
@@ -29,16 +27,20 @@ export const errorHandler = (err, req, res, next) => {
       err.statusCode = 400;
       err.message = "File size should be less than 1MB";
     }
+  } else if (err.name === "JsonWebTokenError") {
+    err.statusCode = 401;
+    err.message = "Invalid token, Please login again!";
   }
 
   res.status(err.statusCode).json({
     success: false,
     message: err.message,
     errObject: err,
+    errLine: err.stack,
   });
 };
 
-//! define a errorMiddleware function, with four parameters (err, req, res, next)
+//Middleware function, with four parameters (err, req, res, next)
 //! use this errorMiddleware in the entry file, inside app.use(errorMiddleware),
 //! the location of app.use(errorMiddleware) is very important --> it should be after all the routes or above listen method
 

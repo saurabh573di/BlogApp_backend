@@ -1,34 +1,66 @@
+
 import { Router } from "express";
 import {
-  deleteProfile,
-  getProfile,
-  getUser,
-  login,
-  logout,
-  register,
-  updateProfile,
-} from "../controllers/user.controller.js";
-import { authenticate } from "../middleware/auth.middleware.js";
-import { validateBody } from "../middleware/validate.middleware.js";
+  addBlog,
+  deleteBlog,
+  deleteBlogImage,
+  generateDescription,
+  getBlog,
+  getBlogs,
+  updateBlogDetails,
+  updateImage,
+} from "../controllers/blog.controller.js";
+import { authenticate } from "../middlewares/auth.middleware.js";
+import upload from "../middlewares/multer.middleware.js";
+import { validateBody } from "../middlewares/validate.middleware.js";
 import {
-  loginUserSchema,
- userRegistrationSchema,
-} from "../validators/user.validator.js";
+  addBlogSchema,
+  generateDescriptionSchema,
+  updateBlogSchema,
+} from "../validators/blog.validator.js";
 
 const router = Router();
 
-router.post("/register", validateBody(userRegistrationSchema), register);
+router.post(
+  "/add",
+  authenticate,
+   upload.single("image"),
+  validateBody(addBlogSchema),
+ 
+  addBlog,
+);
 
-router.get("/single/:id", getUser);
+router.post(
+  "/generate-description",
+  authenticate,
+  validateBody(generateDescriptionSchema),
+  generateDescription,
+);
 
-router.post("/login", validateBody(loginUserSchema), login);
+router.get("/all", getBlogs);
+router.get("/:id", getBlog);
 
-router.post("/logout", authenticate, logout);
+router.patch(
+  "/edit-blog/:id",
+  authenticate,
+   upload.none(),
+  validateBody(updateBlogSchema),
+ 
+  updateBlogDetails,
+);
 
-router.get("/profile", authenticate, getProfile);
+router.patch(
+  "/edit-image/:id",
+  authenticate,
+  upload.single("image"),
+  updateImage,
+);
 
-router.patch("/update-profile", authenticate, updateProfile);
 
-router.patch("/delete-profile", authenticate, deleteProfile);
+router.patch("/delete-image/:id", authenticate, deleteBlogImage);
+
+
+
+router.delete("/delete-blog/:id", authenticate, deleteBlog);
 
 export default router;

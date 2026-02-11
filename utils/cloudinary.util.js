@@ -1,5 +1,5 @@
 //&step 1 for how to deelted file from server after file get successfully uploaded in the clodudinary 
-import v2 from "../config/cloudinary.config.js";
+// import v2 from "../config/cloudinary.config.js";
 
 
 

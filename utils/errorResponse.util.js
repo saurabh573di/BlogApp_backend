@@ -10,13 +10,21 @@
 
 // we are extending the orignal error class
 
-class ErrorResponse extends Error{
+// class ErrorResponse extends Error{
 
-    constructor(message,statusCode){
-        super()
-        this.message= message ;
-        this.statusCode= statusCode;
-    }
+//     constructor(message,statusCode){
+//         super()
+//         this.message= message ;
+//         this.statusCode= statusCode;
+//     }
+// }
+class ErrorResponse extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    // in derived class constructor function, the first statement should be super()
+    // this.message = message;
+    this.statusCode = statusCode;
+  }
 }
 
 

@@ -21,11 +21,9 @@ export const addBlogSchema = Joi.object({
 });
 
 export const updateBlogSchema = Joi.object({
-  title: Joi.string().required().trim().optional(),
-  description: Joi.string().required().trim().optional(),
+  title: Joi.string().trim().optional(),
+  description: Joi.string().trim().optional(),
   category: Joi.string()
-    .required()
-    .optional()
     .valid(
       "science",
       "education",
@@ -33,13 +31,12 @@ export const updateBlogSchema = Joi.object({
       "gaming",
       "books",
       "foods",
-      "travel",
+      "travel"
     )
-    .messages({
-      "any.only": "not valid",
-    }),
+    .optional(),
   tags: Joi.string().optional(),
 }).min(1);
+
 
 export const generateDescriptionSchema = Joi.object({
   title: Joi.string().required().trim(),

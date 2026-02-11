@@ -84,6 +84,8 @@ export const addBlog = asyncHandler(async (req, res) => {
   if (req.file) {
     const dataURL = getDataURL(req.file.buffer, req.file.mimetype);
     const uploadedImage = await uploadImage(dataURL);
+console.log("FILE:", req.file);
+console.log("BUFFER:", req.file?.buffer);
 
     if (uploadedImage) {
       image = {

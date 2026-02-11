@@ -1,10 +1,6 @@
-
-
-
 import UserModel from "../models/User.model.js";
 
 //import the validator file 
-import { userRegistrationSchema } from "../validators/user.validator.js";
 import asyncHandler from "express-async-handler";
 import ErrorResponse from "../utils/ErrorResponse.util.js";
 import { generateJwtToken } from "../utils/jwt.util.js";
@@ -274,16 +270,12 @@ import { generateJwtToken } from "../utils/jwt.util.js";
 
 
 //   //&  res.cookie("tokenName","value",{options})    this will send cookies to the clients brower 
-//   res.cookie("token",token,{
-//     maxAge:10 * 60 * 1000, ,//*here we give time in miliseconds , this options sets an expiry time fo r the cokkie in the brower cookie.
-//     secure:true,  //!It means Cookie can be ONLY sent over HTTPS connections so us false at the time of devlopment 
-//     httpOnly:true , //f& this oprtions tells if we can acces  the acres token in plain js or not 
-//     //* if the secrue is true means yes you can acces it in plain js that is dangerous hackesr can easily crack the acces token
-//     //*defauty this is trye 
-//     //$ set it to the secure:false so that nodboyd can acces the token in plain js 
-//         sameSite: "none",
+//   res.cookie("token", token, {
+//     maxAge: 10 * 60 * 1000, // 10 mins (in ms) , this sets an expiry for the token on the browser
+//     secure: false,  // ← change to false for development
+//     httpOnly: true,
+//     sameSite: "lax",  // ← change from "none"
 //     path: "/",
-
 //   });
 
 // res.status(200).json({
@@ -414,9 +406,9 @@ export const login = asyncHandler(async (req, res, next) => {
 
   res.cookie("token", token, {
     maxAge: 10 * 60 * 1000, // 10 mins (in ms) , this sets an expiry for the token on the browser
-    secure: true, // if set to true, this cannot be accessed in the browser (using js)
+    secure: false,  // ← change to false for development
     httpOnly: true,
-    sameSite: "none",
+    sameSite: "lax",  // ← change from "none"
     path: "/",
   });
   //? res.cookie("tokenName", "value", {options}); this will send cookies to the client's browser

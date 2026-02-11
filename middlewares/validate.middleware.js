@@ -5,7 +5,7 @@
 // we will use this middleware as a route level middleware 
 
 // this middleare is used for every route controller function 
-
+import ErrorResponse from "../utils/ErrorResponse.util.js";
 // 
 
 export const validateBody = (schema) => {
@@ -24,10 +24,11 @@ export const validateBody = (schema) => {
     //     success: false,
     //     message,
     //   });
+     throw new ErrorResponse(message, 400);
     }
 
     // now we are changing the orignal req.body with our validated body 
-          throw new ErrorResponse(message, 400);
+         
 
     req.body=value;
     next();
