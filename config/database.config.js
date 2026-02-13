@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import { MONGODB_URL } from "./index.js";
 
 const connectDB = async function () {
+  console.log("MONGODB_URL: ", MONGODB_URL);
   let client = await mongoose.connect(MONGODB_URL);
   console.log("database connected to: ", client.connection.host);
   // await mongoose.connect(process.env.MONGODB_URL);
